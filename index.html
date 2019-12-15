@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>色あてクイズ</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="">
+    <audio id="sound-file-ok" preload="auto">
+        <source src="https://soundeffect-lab.info/sound/anime/mp3/correct1.mp3" type="audio/mp3"></audio>
+    <audio id="sound-file-ng" preload="auto">
+        <source src="https://soundeffect-lab.info/sound/anime/mp3/incorrect1.mp3" type="audio/mp3"></audio>
+    <style type="text/css">
+        .color {
+            height: 100px;
+            width: 50%;
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        var color_id_array = ['color0', 'color1', 'color2', 'color3', 'color4', 'color5'];
+        var color_array = ['red,赤', 'blue,青', 'green,緑', 'yellow,黄', 'black,黒', 'purple,紫'];
+        var answer_color = ""
+
+
+        function check(value) {
+            if (answer_color === value) {
+                document.getElementById('sound-file-ok').play();
+            } else {
+                document.getElementById('sound-file-ng').play();
+            }
+        }
+
+        function change() {
+
+            //質問を初期化
+            var element_question = document.getElementById("question");
+            if (element_question) {
+                element_question.parentNode.removeChild(element_question);
+            }
+
+            //既存の色を初期化
+            var elems_color = document.getElementsByClassName("color");
+            var len = elems_color.length;
+            for (var i = 0; i < len; i++) {
+                var e = elems_color[0];
+                e.parentNode.removeChild(e);
+            }
+
+            //色の配列をランダムに入れ替え
+            for (var i = color_array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = color_array[i];
+                color_array[i] = color_array[j];
+                color_array[j] = tmp;
+            }
+
+            for (var k = 0; k < color_id_array.length; k++) {
+
+                //色配列を分割
+                var color_array_split = color_array[k].split(',');
+                var color = color_array_split[0];
+
+                //色表示タグ追加
+                var color_id_element = document.getElementById(color_id_array[k]);
+                var element = document.getElementById('btn');
+                element.insertAdjacentHTML('beforebegin', '<div class="color" id="color' + k + '" onclick="check(\'' + color + '\')"></div>');
+
+                //色を設定
+                var color_id_element = document.getElementById(color_id_array[k]);
+                color_id_element.style.background = color;
+            }
+            //色を指定
+            var arrayIndex = Math.floor(Math.random() * color_array.length);
+            var question_color = color_array[arrayIndex];
+            answer_color = question_color.split(',')[0];
+            var answer_color_name = question_color.split(',')[1];
+            var element = document.getElementById('title');
+            element.insertAdjacentHTML('afterbegin', '<h2 id="question">' + answer_color_name + 'はどれですか？</h2>');
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="title">色あてクイズ</h1>
+    <button id="btn" onclick="change()">カラーチェンジ</button>
+</body>
+
+</html>
