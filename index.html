@@ -10,21 +10,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="">
+    <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <audio id="sound-file-ok" preload="auto">
         <source src="https://soundeffect-lab.info/sound/anime/mp3/correct1.mp3" type="audio/mp3"></audio>
     <audio id="sound-file-ng" preload="auto">
         <source src="https://soundeffect-lab.info/sound/anime/mp3/incorrect1.mp3" type="audio/mp3"></audio>
     <style type="text/css">
-        .color {
-            height: 100px;
-            width: 50%;
+        body {
+            max-width: 300px;
+/*
+            border: 1px solid lime;
+*/
+            box-shadow: 5px 5px 10px;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
             padding: 10px;
+            font-family: "Kokoro";
+        }
+        #title {
+            color: #FF8C00;
+            /*非対応のブラウザでの文字色を設定*/
+            background: -webkit-linear-gradient(0deg, #40E0D0, #FF8C00, #FF0080);
+            /*背景色にグラデーションを指定*/
+            -webkit-background-clip: text;
+            /*テキストでくり抜く*/
+            -webkit-text-fill-color: transparent;
+            /*くり抜いた部分は背景を表示*/
+        }
+        #btn{
+            width: 60%;
+            background-color: lime;
+            color: white;
+            margin: auto;
+            box-shadow: 5px 5px 10px;
+        }
+        .color {
+            height: 50px;
+            width: 50px;
+            margin: auto;
+            margin-top: 10px;
+
         }
     </style>
     <script type="text/javascript">
 
         var color_id_array = ['color0', 'color1', 'color2', 'color3', 'color4', 'color5'];
-        var color_array = ['red,赤', 'blue,青', 'green,緑', 'yellow,黄', 'black,黒', 'purple,紫'];
+        var color_array = ['red,あか', 'blue,あお', 'green,みどり', 'yellow,きいろ', 'black,くろ', 'purple,むらさき'];
         var answer_color = ""
 
 
@@ -69,7 +101,7 @@
                 //色表示タグ追加
                 var color_id_element = document.getElementById(color_id_array[k]);
                 var element = document.getElementById('btn');
-                element.insertAdjacentHTML('beforebegin', '<div class="color" id="color' + k + '" onclick="check(\'' + color + '\')"></div>');
+                element.insertAdjacentHTML('afterend', '<div class="color" id="color' + k + '" onclick="check(\'' + color + '\')"></div>');
 
                 //色を設定
                 var color_id_element = document.getElementById(color_id_array[k]);
@@ -81,14 +113,14 @@
             answer_color = question_color.split(',')[0];
             var answer_color_name = question_color.split(',')[1];
             var element = document.getElementById('title');
-            element.insertAdjacentHTML('afterbegin', '<h2 id="question">' + answer_color_name + 'はどれですか？</h2>');
+            element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_color_name + 'はどれ？</h2>');
         }
     </script>
 </head>
 
 <body>
     <h1 id="title">色あてクイズ</h1>
-    <button id="btn" onclick="change()">カラーチェンジ</button>
+    <p id="btn" onclick="change()">色を変えよう</p>
 </body>
 
 </html>
