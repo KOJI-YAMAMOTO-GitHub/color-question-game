@@ -7,59 +7,102 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <link rel="stylesheet" href="">
     <link rel="shortcut icon" href="">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
     <audio id="sound-file-ok" preload="auto">
         <source src="https://soundeffect-lab.info/sound/anime/mp3/correct1.mp3" type="audio/mp3"></audio>
     <audio id="sound-file-ng" preload="auto">
         <source src="https://soundeffect-lab.info/sound/anime/mp3/incorrect1.mp3" type="audio/mp3"></audio>
     <style type="text/css">
         body {
-            max-width: 800px;
-            min-width: 300px;
-/*
-            box-shadow: 5px 5px 10px;
-*/
-            margin-right: auto;
-            margin-left: auto;
             text-align: center;
-            padding: 10px;
-            font-family: "Kokoro";
+            font-family: "Nico Moji";
         }
+
         #title {
             color: #FF8C00;
             /*非対応のブラウザでの文字色を設定*/
-            background: -webkit-linear-gradient(0deg, #40E0D0, #FF8C00, #FF0080);
+            background: -webkit-linear-gradient(0deg, rgb(249, 251, 251), rgb(238, 255, 0), rgb(251, 0, 176));
             /*背景色にグラデーションを指定*/
             -webkit-background-clip: text;
             /*テキストでくり抜く*/
             -webkit-text-fill-color: transparent;
             /*くり抜いた部分は背景を表示*/
+            font-size: 8vw;
+            margin: 5px;
         }
-        #btn{
-            width: 60%;
-            height: 50px;
-            background-color: lime;
+
+        #question {
             color: white;
-            margin: auto;
-            box-shadow: 5px 5px 10px;
-            font-size: 30px;
         }
-        .color_box{
-            max-width: 750px;
-            min-width: 250px;
-            margin: auto;
+
+        #btn {
+            width: 30vw;
+            height: 30px;
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            background: #668ad8;
+            /*ボタン色*/
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
         }
+
+        #btn:active {
+            /*ボタンを押したとき*/
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            /*下に動く*/
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+            /*影を小さく*/
+            border-bottom: none;
+        }
+
+        #color-ul {
+            list-style: none;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: space-around;
+            justify-content: space-around;
+        }
+
         .color {
-            height: 10em;
-            width: 10em;
+            height: 20vh;
+            width: 10vw;
             margin: auto;
             margin-top: 10px;
-            position: relative; 
-            float:left;
-          }
+            border: 5px solid whitesmoke;
+            border-radius: 5px;
+        }
+
+        @media screen and (min-width: 767px) {
+            /*PC用*/
+
+            body {
+                background-color: #58FA58;
+            }
+
+        }
+
+        @media screen and (max-width: 767px) {
+            /*タブレット用*/
+
+            body {
+                background-color: #2EFEF7;
+            }
+        }
+
+        @media screen and (max-width: 479px) {
+            /*スマホ用*/
+
+            body {
+                background-color: #D358F7;
+            }
+        }
     </style>
     <script type="text/javascript">
 
@@ -108,8 +151,8 @@
 
                 //色表示タグ追加
                 var color_id_element = document.getElementById(color_id_array[k]);
-                var element = document.getElementById('color_box');
-                element.insertAdjacentHTML('beforeend', '<div class="color" id="color' + k + '" onclick="check(\'' + color + '\')"></div>');
+                var element = document.getElementById('color-ul');
+                element.insertAdjacentHTML('beforeend', '<li class="color" id="color' + k + '" onclick="check(\'' + color + '\')"></li>');
 
                 //色を設定
                 var color_id_element = document.getElementById(color_id_array[k]);
@@ -120,8 +163,8 @@
             var question_color = color_array[arrayIndex];
             answer_color = question_color.split(',')[0];
             var answer_color_name = question_color.split(',')[1];
-            var element = document.getElementById('title');
-            element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_color_name + 'はどれ？</h2>');
+            var element = document.getElementById('btn');
+            element.insertAdjacentHTML('afterend', '<h2 id="question">' + answer_color_name + 'はどれかな？</h2>');
         }
     </script>
 </head>
@@ -129,7 +172,7 @@
 <body>
     <h1 id="title">色あてクイズ</h1>
     <p id="btn" onclick="change()">色を変えよう</p>
-    <div id="color_box"></div>
+    <ul id="color-ul"></ul>
 </body>
 
 </html>
