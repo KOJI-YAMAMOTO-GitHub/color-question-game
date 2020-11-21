@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-100445243-8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100445243-8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'UA-100445243-8');
-</script>
+        gtag('config', 'UA-100445243-8');
+    </script>
     <audio id="sound-file-ok" preload="auto">
         <source src="https://soundeffect-lab.info/sound/anime/mp3/correct1.mp3" type="audio/mp3"></audio>
     <audio id="sound-file-ng" preload="auto">
@@ -32,20 +32,22 @@
         }
 
         #title {
-            color: #FF8C00;
             /*非対応のブラウザでの文字色を設定*/
-            background: -webkit-linear-gradient(0deg, rgb(249, 251, 251), rgb(238, 255, 0), rgb(251, 0, 176));
+            color: #ffffff;
             /*背景色にグラデーションを指定*/
-            -webkit-background-clip: text;
+            /* background: -webkit-linear-gradient(0deg, rgb(249, 251, 251), rgb(238, 255, 0), rgb(251, 0, 176)); */
             /*テキストでくり抜く*/
-            -webkit-text-fill-color: transparent;
+            /* -webkit-background-clip: text; */
             /*くり抜いた部分は背景を表示*/
+            /* -webkit-text-fill-color: transparent; */
             font-size: 8vw;
             margin: 5px;
+            filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.6));
         }
 
         #question {
             color: white;
+            font-size: 5vw;
         }
 
         #btn {
@@ -54,10 +56,10 @@
             display: inline-block;
             padding: 0.5em 1em;
             text-decoration: none;
-            background: #668ad8;
+            background: #06c9fa;
             /*ボタン色*/
             color: #FFF;
-            border-bottom: solid 4px #627295;
+            border-bottom: solid 4px #008192;
             border-radius: 3px;
         }
 
@@ -88,13 +90,29 @@
             animation-fill-mode: forwards;
         }
 
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .color {
-            height: 20vh;
-            width: 10vw;
+            height: 150px;
+            width: 150px;
             margin: auto;
             margin-top: 10px;
             border: 5px solid whitesmoke;
             border-radius: 5px;
+            filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.6));
+        }
+
+        .color:active {
+            /*ボタンを押したとき*/
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            /*下に動く*/
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+            /*影を小さく*/
+            border-bottom: none;
         }
 
         @keyframes fade-in3 {
@@ -113,7 +131,7 @@
             /*PC用*/
 
             body {
-                background-color: #58FA58;
+                background-color: #298afa;
             }
 
         }
@@ -122,7 +140,7 @@
             /*タブレット用*/
 
             body {
-                background-color: #2EFEF7;
+                background-color: #298afa;
             }
         }
 
@@ -130,7 +148,7 @@
             /*スマホ用*/
 
             body {
-                background-color: #D358F7;
+                background-color: #298afa;
             }
 
             #color-ul {
@@ -149,8 +167,8 @@
     </style>
     <script type="text/javascript">
 
-        var color_id_array = ['color0', 'color1', 'color2', 'color3', 'color4', 'color5'];
-        var color_array = ['red,あか', 'blue,あお', 'green,みどり', 'yellow,きいろ', 'black,くろ', 'purple,むらさき'];
+        var color_id_array = ['color0', 'color1', 'color2', 'color3', 'color4', 'color5', 'color6', 'color7'];
+        var color_array = ['red,あか', 'blue,あお', 'green,みどり', 'yellow,きいろ', 'black,くろ', 'purple,むらさき', 'white,白', 'gray,グレー'];
         var answer_color = ""
 
 
@@ -215,7 +233,7 @@
 <body>
     <h1 id="title">色あてクイズ</h1>
     <p id="btn" onclick="change()">色を変えよう</p>
-    <ul id="color-ul"></ul>
+    <ul id="color-ul" class="flex"></ul>
 </body>
 
 </html>
